@@ -5,6 +5,6 @@ A Django Application in which you can search a Movie by it's Title, Cast, Direct
 
 <div>
   <video width="320" height="240" autoplay>
-    <source src="static_files/images/movies website video.mp4" type="video/mp4">
+    <source src="https://github.com/Mohit-Harsh/Movie-Synopsis-Search/blob/main/static_files/images/movies%20website%20video.mp4" type="video/mp4">
   </video>
 </div>
