@@ -4,5 +4,8 @@
 A Django Application in which you can search a Movie by it's Title, Cast, Director or Synopsis.
 
 
-https://github.com/Mohit-Harsh/Movie-Synopsis-Search/assets/111693866/71cb7493-4b71-4a07-9669-6d8d0b51aa24
+
+
+
+https://github.com/Mohit-Harsh/Movie-Synopsis-Search/assets/111693866/9ef0ac3e-f359-438f-9dc0-4923f55f4a58
 
