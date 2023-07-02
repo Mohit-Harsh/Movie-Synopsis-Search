@@ -1,0 +1,218 @@
+{%load static%}
+{%static 'images' as baseurl%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+</head>
+
+<body style="background-color: black;">
+    <div class="container-md" id="wallpaper" style="height: 20vw; width: auto; background-repeat: no-repeat; background-size: cover;padding-top: 1.5vw;">
+        <nav class="navbar">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1" style="margin-left: 3vw; font-size: 1.5vw; color: white;">Movie Synopsis</span>
+                
+                <form action="search" id="search_bar" class="d-flex" role="search" style="margin-right: 3vw; height: 2vw; margin-top:0vw; width: 30vw;">
+                    <input name="search_movie" id="search_input" class="search_bar" type="search" placeholder="Search" aria-label="Search" style="font-size: 1vw; background: transparent; color: white; border: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.531);background-color: transparent; border-radius: 0; height: 1.5vw; width: 30vw;">
+                    <button class="button" id="search_btn" type="submit" style=" height: 2vw; font-size: 1vw; font-size: 0.7vw;"><img src="{%static 'images/icons8-search-128.png'%}" alt="" style="width: 30px; height: auto;"></button>
+                </form>
+
+                <button class="btn btn-outline-light" type="submit" style=" height: 2vw; font-size: 1vw; font-size: 0.7vw;margin-right: -4vw;">Login</button>
+                <button class="btn btn-outline-danger" type="submit" style=" height: 2vw; font-size: 1vw; font-size: 0.7vw;">Sign Up</button>
+                
+            </div>
+        </nav>
+
+        <button class="button" id="upload_btn" type="submit">Upload movie</button>
+        <button class="button" id="view_info" type="submit" style="margin-left: 1vw;">View info</button>
+
+    </div>
+    <div class="container-md" style="background-color: beige; height: fit-content; padding-left: 2vw; padding-right: 2vw; padding-top: 2vw; border-top: 2px solid red ; padding-bottom: 2vw;">
+
+        {%for mov in movies_list%}
+        <div class="row" >
+            {%for m in mov%}
+            <div class="col-3">
+                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#{{m.modal_id}}" data-id="{{m.modal_id}}">
+                    <div class="card" style="width: 15vw; height: 25vw;">
+                        <div class="row" style="height: 18vw; overflow-y: hidden;">
+                            <img src="{{m.image}}" class="card-img-top" alt="..." style="height: 18vw;">
+                            <div class="card_synopsis">
+                                <h5 style="text-decoration: underline; color: white; text-align: start;">Synopsis</h5>
+                                <p style="color: white; font-size: 0.7vw; vertical-align: text-bottom; text-align: start;">{{m.summary}}</p>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 0vw 1vw 0vw 1vw;">
+                            <div class="card-body">
+                                <div class="row">
+                                  <div class="col-8" style="height: 3vw; overflow-x: hidden; text-align: start;">
+                                      <h3 class="Title" style="color: black;font-size: 1.2vw;">{{m.title}}</h3>
+                                  </div>
+                                  <div class="col-4" style="align-items: center; display: flex;">
+                                      <div style="border-width: 1px; border-color: red; border-radius: 5px; color: red; padding: 0.2vw 0.2vw 0.2vw 0.2vw; width: 2vw;border-style: solid; height: 1.5vw; text-align: center; font-size: 0.7vw;"><p>{{m.rating}}</p></div>
+                                  </div>
+                                </div>
+                                <p class="Genre" style="color: grey; font-size: 0.8vw; overflow-x: hidden; text-align: start;">{{m.genre}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="modal fade" id="{{m.modal_id}}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.75);">
+                        <div class="modal-header">
+                            <div class="row" style="width: 100%;">
+                                <div class="col-5">
+                                    <img src="{{m.image}}" alt="" style="width: 12vw; height: auto; margin-left: 1vw;">
+                                </div>
+                                <div class="col-7">
+                                    <h4 style="color: white;">{{m.title}}</h4>
+                                    <ul role="presentation" style="display: flex; width: 100%; padding-left: 0; height: 1vw;">
+                                        <li class = "movie_date_runtime">
+                                            <p style="color: white; font-size: 0.8vw;">{{m.year}}</p>
+                                        </li>
+                                        <span class="vr"></span>
+                                        <li class = "movie_date_runtime">
+                                            <p style="color: white; font-size: 0.8vw;">{{m.runtime}} mins</p>
+                                        </li>
+                                        <span class="vr"></span>
+                                        <li class = "movie_date_runtime">
+                                            <p style="color: white; font-size: 0.8vw;">{{m.certificate}}</p>
+                                        </li>
+                                    </ul>
+                                    <p style="font-size: 0.8vw; color: rgba(255, 255, 255, 0.692);">{{m.genre}}</p>
+                                    <p style="margin-top: 1vw; font-size: 1vw; color: white;">Cast : {{m.modal_cast}}</p>
+                                    <p style="margin-top: 1vw; font-size: 1vw; color: white;">Director : {{m.director}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <p style="color: white;">{{m.summary}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+<style>
+    ::-webkit-scrollbar
+    {
+        display: none;
+    }
+    ::placeholder
+    {
+        color: rgba(255, 255, 255, 0.515);
+    }
+    #wallpaper
+    {
+        background-position-y: center;
+        background-image: url("{%static '/images/wallpaperflare.com_wallpaper.jpg'%}");
+    }
+    #search_btn
+    {
+        height: 2vw; 
+        font-size: 1vw; 
+        font-size: 0.7vw;
+        border: transparent;
+        background-color: transparent;
+    }
+    .card
+    {
+        transition-duration: 0.3s;
+        overflow-y: hidden;
+    }
+    .card:hover
+    {
+        cursor: pointer;
+        transition-duration: 0.3s;  
+        box-shadow: 0 0 20px rgba(33,33,33,.2);
+    }
+    .card_synopsis
+    {
+        position: relative;
+        bottom: 0vw;
+        padding: 2vw;
+        height: 13vw;
+        vertical-align: baseline;
+        background-color: rgba(0, 0, 0, 0.152);
+        transition-duration: 0.4s;
+    }
+    .card:hover .card_synopsis
+    {
+        transition-duration: 0.4s;
+        bottom: 13vw;
+        backdrop-filter: blur(4px);
+    }
+    .movie_date_runtime
+    {
+        list-style: none;
+    }
+    .vr
+    {
+        width: 1px;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        border-right: 2px solid rgb(255, 255, 255);
+    }
+    .search_bar
+    {
+        outline: transparent;
+    }
+    #upload_btn
+    {
+        width: fit-content;
+        border: transparent;
+        border-radius: 10px;
+        color: white;
+        background-color: rgb(192, 0, 0);
+        opacity: 70%;
+        padding: 0.2vw 1vw 0.2vw 1vw;
+        font-size: 1.2vw;
+        position: relative;
+        top: 10vw;
+        left: 3vw;
+        transition-duration: 0.3s;
+    }
+    #upload_btn:hover
+    {
+        cursor: pointer;
+        transition-duration: 0.3s;
+        opacity: 100%;
+    }
+    #view_info
+    {
+        width: fit-content;
+        border: 1px solid white;
+        border-radius: 10px;
+        color: white;
+        background-color: transparent;
+        opacity: 70%;
+        padding: 0.2vw 1vw 0.2vw 1vw;
+        font-size: 1.2vw;
+        position: relative;
+        top: 10vw;
+        left: 3vw;
+        transition-duration: 0.3s;
+    }
+    #view_info:hover
+    {
+        transition-duration: 0.3s;
+        opacity: 100%;
+    }
+</style>
+
+</html>
