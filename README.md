@@ -39,7 +39,6 @@ A Django Application in which you can search a Movie by it's Title, Cast, Direct
 
 
 * In this step we created vector embeddings for ```Title```, ```Director``` and ```Cast``` columns using Sentence Transformers.
-* The Notebook related to Sentence Embeddings can be found here - 
 * We also created vector embeddings for the ```Synopsis``` using ```Facebook Context Encoders``` and ```Haystack DPR``` module.
 * We saved the above embeddings as documents in ```FAISS Document Store``` from Haystack.
 * The Notebook related to Context Embeddings can be found here - https://www.kaggle.com/code/pmohitharsh/imdb-dpr-training
